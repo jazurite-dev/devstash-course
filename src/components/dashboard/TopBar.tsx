@@ -2,6 +2,7 @@ import { Layers, Plus, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function TopBar() {
   return (
@@ -10,6 +11,8 @@ export function TopBar() {
         <Layers className="size-5 text-primary" />
         <span>DevStash</span>
       </div>
+
+      <SidebarTrigger />
 
       <div className="relative mx-auto w-full max-w-md">
         <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
