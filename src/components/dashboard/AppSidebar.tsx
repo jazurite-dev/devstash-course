@@ -1,17 +1,8 @@
 import Link from "next/link";
-import {
-  Code,
-  File,
-  Image as ImageIcon,
-  Link as LinkIcon,
-  Settings,
-  Sparkles,
-  StickyNote,
-  Terminal,
-  type LucideIcon,
-} from "lucide-react";
+import { Settings } from "lucide-react";
 
 import { collections, currentUser, itemTypes } from "@/lib/mock-data";
+import { typeIcons } from "@/lib/type-icons";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Sidebar,
@@ -25,16 +16,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-const typeIcons: Record<string, LucideIcon> = {
-  Code,
-  Sparkles,
-  Terminal,
-  StickyNote,
-  File,
-  Image: ImageIcon,
-  Link: LinkIcon,
-};
 
 const RECENT_COLLECTIONS_LIMIT = 5;
 
@@ -52,7 +33,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {itemTypes.map((type) => {
-                const Icon = typeIcons[type.icon] ?? Code;
+                const Icon = typeIcons[type.icon] ?? typeIcons.Code;
                 return (
                   <SidebarMenuItem key={type.id}>
                     <SidebarMenuButton
