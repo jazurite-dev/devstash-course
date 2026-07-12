@@ -160,6 +160,9 @@ CREATE INDEX "Collection_userId_idx" ON "Collection"("userId");
 -- CreateIndex
 CREATE INDEX "Tag_userId_idx" ON "Tag"("userId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Tag_userId_name_key" ON "Tag"("userId", "name");
+
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
