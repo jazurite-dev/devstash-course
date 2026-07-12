@@ -1,23 +1,24 @@
 # Current Feature
 
-Seed Sample Data
+Database Test Script
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
-- Create `prisma/seed.ts` to populate the database with sample data for development and demos
-- Demo user: demo@devstash.io / 12345678 (bcrypt, 12 rounds)
-- All 7 system item types (snippet, prompt, command, note, file, image, link)
-- 5 collections with realistic items: React Patterns, AI Workflows, DevOps, Terminal Commands, Design Resources
+- Create `scripts/test-db.ts` to verify the database connection and seeded data
+- Print counts for all models (users, item types, collections, items, tags)
+- Print item type list with colors and icons
+- Print collection breakdown with item counts
+- Print demo user details
 
 ## Notes
 
-- Run with `npx prisma db seed`
-- Seed is idempotent — safe to re-run (clears demo user data first)
+- Run with `npx tsx scripts/test-db.ts`
 - Uses `DIRECT_URL` for the database connection (direct, not pooled)
+- `dotenv` already installed — no additional packages needed
 
 ## History
 
@@ -29,3 +30,5 @@ In Progress
 - Dashboard UI Layout - Phase 2 — shadcn/ui sidebar block (collapsible, drawer on mobile), AppSidebar with item type links, favorite/recent collections, user footer; build and lint passing
 - Dashboard UI Layout - Phase 3 — stats cards, collections grid, pinned items, recent items (shadcn card/badge, shared ItemRow/type-icons/format utils); completes the 3-phase dashboard UI layout; build and lint passing
 - Prisma + Neon PostgreSQL Setup — Prisma 7 with @prisma/adapter-neon; full schema (User, Item, ItemType, Collection, ItemCollection, Tag, ItemTag + NextAuth models); initial migration applied to dev branch; build passing
+- Seed Sample Data — idempotent seed script (demo@devstash.io, 7 system types, 5 collections, 18 items, 8 tags); uses DIRECT_URL; run with `npx prisma db seed`
+- Database Test Script — `scripts/test-db.ts` verifies connection and prints model counts, item types, collections, and demo user details
