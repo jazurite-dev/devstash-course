@@ -1,6 +1,6 @@
 # Current Feature
 
-Database Test Script
+Dashboard Collections — Live Data
 
 ## Status
 
@@ -8,17 +8,14 @@ Completed
 
 ## Goals
 
-- Create `scripts/test-db.ts` to verify the database connection and seeded data
-- Print counts for all models (users, item types, collections, items, tags)
-- Print item type list with colors and icons
-- Print collection breakdown with item counts
-- Print demo user details
-
-## Notes
-
-- Run with `npx tsx scripts/test-db.ts`
-- Uses `DIRECT_URL` for the database connection (direct, not pooled)
-- `dotenv` already installed — no additional packages needed
+- Replace dummy collection data in the dashboard main area with real data from Neon/Prisma
+- Create `src/lib/db/collections.ts` with data fetching functions
+- Fetch collections directly in a server component (no client-side fetching)
+- Collection card border color derived from the most-used content type in that collection
+- Show small icons of all item types present in each collection
+- Keep the existing design — no layout or visual changes
+- Update collection stats display to reflect real counts
+- Do not add items underneath cards yet (future feature)
 
 ## History
 
@@ -32,3 +29,4 @@ Completed
 - Prisma + Neon PostgreSQL Setup — Prisma 7 with @prisma/adapter-neon; full schema (User, Item, ItemType, Collection, ItemCollection, Tag, ItemTag + NextAuth models); initial migration applied to dev branch; build passing
 - Seed Sample Data — idempotent seed script (demo@devstash.io, 7 system types, 5 collections, 18 items, 8 tags); uses DIRECT_URL; run with `npx prisma db seed`
 - Database Test Script — `scripts/test-db.ts` verifies connection and prints model counts, item types, collections, and demo user details
+- Dashboard Collections — Live Data — replaced mock collection cards with real Prisma data; border color derived from dominant content type; type icons shown per collection; build and lint passing
