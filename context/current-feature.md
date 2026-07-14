@@ -1,6 +1,6 @@
 # Current Feature
 
-Dashboard Collections — Live Data
+Dashboard Items — Live Data
 
 ## Status
 
@@ -8,14 +8,14 @@ Completed
 
 ## Goals
 
-- Replace dummy collection data in the dashboard main area with real data from Neon/Prisma
-- Create `src/lib/db/collections.ts` with data fetching functions
-- Fetch collections directly in a server component (no client-side fetching)
-- Collection card border color derived from the most-used content type in that collection
-- Show small icons of all item types present in each collection
-- Keep the existing design — no layout or visual changes
-- Update collection stats display to reflect real counts
-- Do not add items underneath cards yet (future feature)
+- Replace dummy pinned/recent item data in the dashboard main area with real data from Neon/Prisma (currently from `src/lib/mock-data.ts`)
+- Create `src/lib/db/items.ts` with data fetching functions
+- Fetch items directly in a server component (no client-side fetching)
+- Item card icon/border color derived from the item's type
+- Display item type tags and other existing item card details (reference `@context/screenshots/dashboard-ui-main.png` if needed)
+- If there are no pinned items, don't display the pinned section
+- Update collection stats display
+- Keep the existing design — layout is already there
 
 ## History
 
@@ -30,3 +30,4 @@ Completed
 - Seed Sample Data — idempotent seed script (demo@devstash.io, 7 system types, 5 collections, 18 items, 8 tags); uses DIRECT_URL; run with `npx prisma db seed`
 - Database Test Script — `scripts/test-db.ts` verifies connection and prints model counts, item types, collections, and demo user details
 - Dashboard Collections — Live Data — replaced mock collection cards with real Prisma data; border color derived from dominant content type; type icons shown per collection; build and lint passing
+- Dashboard Items — Live Data — replaced mock pinned/recent item data with real Prisma data (`src/lib/db/items.ts`); item card icon/border derived from item type, tags pulled from `ItemTag`/`Tag`; pinned section hidden when empty; stats cards now use real item/collection counts (`getItemStats`, `getCollectionStats`); build and lint passing

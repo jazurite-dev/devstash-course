@@ -65,3 +65,12 @@ export async function getRecentCollections(limit = 6): Promise<CollectionCard[]>
     };
   });
 }
+
+export async function getCollectionStats() {
+  const [total, favorites] = await Promise.all([
+    prisma.collection.count(),
+    prisma.collection.count({ where: { isFavorite: true } }),
+  ]);
+
+  return { total, favorites };
+}
