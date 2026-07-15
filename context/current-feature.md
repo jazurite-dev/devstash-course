@@ -1,6 +1,6 @@
 # Current Feature
 
-Dashboard Items — Live Data
+Stats & Sidebar — Live Data
 
 ## Status
 
@@ -8,14 +8,13 @@ Completed
 
 ## Goals
 
-- Replace dummy pinned/recent item data in the dashboard main area with real data from Neon/Prisma (currently from `src/lib/mock-data.ts`)
-- Create `src/lib/db/items.ts` with data fetching functions
-- Fetch items directly in a server component (no client-side fetching)
-- Item card icon/border color derived from the item's type
-- Display item type tags and other existing item card details (reference `@context/screenshots/dashboard-ui-main.png` if needed)
-- If there are no pinned items, don't display the pinned section
-- Update collection stats display
-- Keep the existing design — layout is already there
+- Display main-area stats from real database data instead of `src/lib/mock-data.ts`
+- Display system item types in the sidebar with their icons, linking to `/items/[typename]`
+- Show real collection data (favorites/recents) in the sidebar instead of mock data
+- Add a "View all collections" link under the sidebar collections list, going to `/collections`
+- Keep star icons for favorite collections; for recent collections, show a colored circle based on the most-used item type in that collection
+- Add data fetching functions to `src/lib/db/items.ts` (reference `src/lib/db/collections.ts` for pattern)
+- Keep the existing design/layout — no visual changes
 
 ## History
 
@@ -30,4 +29,5 @@ Completed
 - Seed Sample Data — idempotent seed script (demo@devstash.io, 7 system types, 5 collections, 18 items, 8 tags); uses DIRECT_URL; run with `npx prisma db seed`
 - Database Test Script — `scripts/test-db.ts` verifies connection and prints model counts, item types, collections, and demo user details
 - Dashboard Collections — Live Data — replaced mock collection cards with real Prisma data; border color derived from dominant content type; type icons shown per collection; build and lint passing
-- Dashboard Items — Live Data — replaced mock pinned/recent item data with real Prisma data (`src/lib/db/items.ts`); item card icon/border derived from item type, tags pulled from `ItemTag`/`Tag`; pinned section hidden when empty; stats cards now use real item/collection counts (`getItemStats`, `getCollectionStats`); build and lint passing
+- Dashboard Items — Live Data — replaced mock pinned/recent item data with real Prisma data (`src/lib/db/items.ts`); item card icon/border derived from item type, tags pulled from `ItemTag`/`Tag`; pinned section hidden when empty; stats cards now use real item/collection counts (`getItemStats`, `getCollectionStats`); build and lint passing; merged to main
+- Stats & Sidebar — Live Data — sidebar item types now come from `getItemTypesWithCounts` (`src/lib/db/items.ts`) linking to `/items/[typename]`; favorite/recent collections in sidebar use `getFavoriteCollections`/`getRecentNonFavoriteCollections` (`src/lib/db/collections.ts`); favorites show a star icon, recents show a dot colored by dominant item type; added "View all collections" link to `/collections`; build and lint passing

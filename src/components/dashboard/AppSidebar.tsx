@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { Settings } from "lucide-react";
+import { Settings, Star } from "lucide-react";
 
-import { collections, currentUser, itemTypes } from "@/lib/mock-data";
+import { getFavoriteCollections, getRecentNonFavoriteCollections } from "@/lib/db/collections";
+import { getItemTypesWithCounts } from "@/lib/db/items";
+import { currentUser } from "@/lib/mock-data";
 import { typeIcons } from "@/lib/type-icons";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -19,11 +21,12 @@ import {
 
 const RECENT_COLLECTIONS_LIMIT = 5;
 
-export function AppSidebar() {
-  const favoriteCollections = collections.filter((c) => c.isFavorite);
-  const recentCollections = collections
-    .filter((c) => !c.isFavorite)
-    .slice(0, RECENT_COLLECTIONS_LIMIT);
+export async function AppSidebar() {
+  const [itemTypes, favoriteCollections, recentCollections] = await Promise.all([
+    getItemTypesWithCounts(),
+    getFavoriteCollections(),
+    getRecentNonFavoriteCollections(RECENT_COLLECTIONS_LIMIT),
+  ]);
 
   return (
     <Sidebar collapsible="icon">
@@ -58,10 +61,7 @@ export function AppSidebar() {
               {favoriteCollections.map((collection) => (
                 <SidebarMenuItem key={collection.id}>
                   <SidebarMenuButton tooltip={collection.name}>
-                    <span
-                      className="size-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: collection.color }}
-                    />
+                    <Star className="size-3.5 shrink-0 fill-current text-yellow-500" />
                     <span>{collection.name}</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge>{collection.itemCount}</SidebarMenuBadge>
@@ -80,13 +80,21 @@ export function AppSidebar() {
                   <SidebarMenuButton tooltip={collection.name}>
                     <span
                       className="size-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: collection.color }}
+                      style={{ backgroundColor: collection.borderColor }}
                     />
                     <span>{collection.name}</span>
                   </SidebarMenuButton>
                   <SidebarMenuBadge>{collection.itemCount}</SidebarMenuBadge>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={<Link href="/collections" />}
+                  className="text-muted-foreground"
+                >
+                  <span>View all collections</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
