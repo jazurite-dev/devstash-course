@@ -17,3 +17,10 @@ Read the following to get the full context of the project:
 - **Build**: `npm run build`
 - **Production server**: `npm run start`
 - **Lint**: `npm run lint`
+
+## Neon MCP
+
+- Project: **Devstash** (`morning-bird-90427711`)
+- Default branch for all Neon MCP operations: **development** (`br-sparkling-haze-ao9bluvi`)
+- Always pass this project ID and branch ID explicitly to Neon MCP tools (e.g. `run_sql`, `describe_branch`) unless told otherwise.
+- **Never** run queries or operations against the **production** branch (`br-purple-dream-ao88ujyx`) unless explicitly instructed to target production for that specific request.
